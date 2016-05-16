@@ -51,6 +51,56 @@ namespace assetconv {
             unsigned group_id;//animations doesn't have much sense with only one bone
         };
         
+        struct pos3f_s
+        {
+            glm::vec3 pos;
+        };
+        
+        struct pos3fnormal3f_s
+        {
+            glm::vec3 pos;
+            glm::vec3 normal;
+        };
+        
+        struct pos3fnormal3fuv2f_s
+        {
+            glm::vec3 pos;
+            glm::vec3 normal;
+            glm::vec2 uv;
+        };
+
+        
+        struct pos3fnormal3fuv2ftangent3f_s
+        {
+            glm::vec3 pos;
+            glm::vec3 normal;
+            glm::vec2 uv;
+            glm::vec3 tangent;
+        };
+
+        
+        struct pos3fnormal3fuv2fmatrixes4iweights4f_s
+        {
+            glm::vec3 pos;
+            glm::vec3 normal;
+            glm::vec2 uv;
+            glm::tvec4<unsigned char, glm::lowp> matrixes;
+            glm::vec4 weights;
+        };
+
+        
+        struct pos3fnormal3fuv2ftangent3fmatrixes4iweights4f_s
+        {
+            glm::vec3 pos;
+            glm::vec3 normal;
+            glm::vec2 uv;
+            glm::vec3 tangent;
+            glm::tvec4<unsigned char, glm::lowp> matrixes;
+            glm::vec4 weights;
+        };
+
+        
+        
         struct mesh {
             unsigned vertex_buffer_id;
             unsigned index_buffer_id;
