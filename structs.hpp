@@ -12,13 +12,13 @@
 #include <glm/glm.hpp>
 
 namespace assetconv {
-    namespace file {
+    namespace storage {
         struct buffer_desc
         {
             unsigned long ptr;
             unsigned long length;
             unsigned char align;
-            unsigned char type;
+
             enum buffer_type : unsigned char
             {
                 BUFFERS_LIST, //buffer_desc
@@ -28,12 +28,12 @@ namespace assetconv {
                 MESHES_DESC,
                 ANIMATIONS_DESC,
                 NAMES
-            };
+            } type;
         };
         
         struct name_desc{ //this is polymorphic but wont be in the engine
             char name[256];
-            unsigned char buffer_type;
+            buffer_desc::buffer_type buffer_type;
             unsigned object_id;
         };
         
@@ -105,7 +105,10 @@ namespace assetconv {
             unsigned vertex_buffer_id;
             unsigned index_buffer_id;
             unsigned texture_ids[4];
-            unsigned char vertex_spec;
+            unsigned long vertex_buffer_offset;
+            unsigned vertex_buffer_len;
+            unsigned long index_buffer_offset;
+            unsigned index_buffer_len;
             enum vertex_specs : unsigned char
             {
                 pos3f,
@@ -114,20 +117,20 @@ namespace assetconv {
                 pos3fnormal3fuv2ftangent3f,
                 pos3fnormal3fuv2fmatrixes4iweights4f,
                 pos3fnormal3fuv2ftangent3fmatrixes4iweights4f
-            };
+            } vertex_spec;
         };
         
         struct node {
             glm::mat4 transform;
             unsigned parent_id;
-            unsigned char node_type;
+ 
             enum node_types: unsigned char {
                 mesh,
                 camera,
                 light,
                 bone,
                 empty
-            };
+            } node_type;
             
             struct mesh_additional
             {
